@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <title>Acompanhamento de Pedidos</title>
+    <style>
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table label {
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 10px auto;
+            max-width: 75%;
+            background-image: radial-gradient(grey, #ccc, white);
+        }
+
+        .form-select-sm {
+            border-color: #ccc;
+            border-radius: 4px;
+            float: inline-end
+        }
+
+        select:disabled {
+            background-color: #ddd;
+        }
+
+        .positivo {
+            color: green;
+        }
+
+        .nulo {
+            color: red;
+        }
+
+        td b {
+            font-weight: 500;
+        }
+    </style>
+    <script type="text/javascript">
+        function lockSelect(element, other) {
+            if (element.value == "") {
+                document.getElementById(other).disabled = true;
+            } else {
+                document.getElementById(other).disabled = false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div class="container w-75 my-4 border border-1 mx-auto shadow p-4">
+            <h5 class="display-4 mb-3 text-center">CRAS Selecionados</h5>
+            <div class="my-2 ml-auto">
+                <button class="btn btn-outline-secondary" type="button" name="copiar">Copiar</button>
+                <button class="btn btn-outline-secondary" type="button" name="csv">CSV</button>
+                <button class="btn btn-outline-secondary" type="button" name="pdf">PDF</button>
+                <button class="btn btn-outline-secondary" type="button" name="imprimir">Imprimir</button>
+            </div>
+            <div class="card">
+                <h5 class="card-header">
+                    <div class="row align-items-baseline justify-content-evenly" style="font-size: 18px;">
+                        <div class="col-lg-auto">
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                                <button class="btn btn-outline-success" type="submit"><i
+                                        class="bi bi-search"></i></button>
+                            </form>
+                        </div>
+                        <label for="estado" class="col-lg-auto col-form-label">Estado:</label>
+                        <div class="col-lg-auto">
+                            <select id="estado" name="estado" class="form-select"
+                                onchange="lockSelect(this, 'municipio');">
+                                <option value="" selected>Selecionar</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <label for="municipio" class="col-lg-auto col-form-label">Município:</label>
+                        <div class="col-lg-auto">
+                            <select id="municipio" name="municipio" class="form-select"
+                                onchange="lockSelect(this, 'cras');" disabled>
+                                <option value="" selected>Selecionar</option>
+                                <option value="EstivaGerbi">Estiva Gerbi</option>
+                                <option value="Chavantes">Chavantes</option>
+                                <option value="Zacarias">Zacarias</option>
+                                <option value="Votuporanga">Votuporanga</option>
+                                <option value="Votorantim">Votorantim</option>
+                                <option value="Urânia">Urânia</option>
+                                <option value="UniãoPaulista">União Paulista</option>
+                                <option value="Urupês">Urupês</option>
+                                <option value="TrêsFronteiras">Três Fronteiras</option>
+                                <option value="Tremembé">Tremembé</option>
+                                <option value="Trabiju">Trabiju</option>
+                                <option value="Torrinha">Torrinha</option>
+                                <option value="SãoSimão">São Simão</option>
+                                <option value="SãoSebastião">São Sebastião</option>
+                                <option value="Santos">Santos</option>
+                                <option value="SantoExpedito">Santo Expedito</option>
+                                <option value="Pindamonhangaba">Pindamonhangaba</option>
+                                <option value="Pinhalzinho">Pinhalzinho</option>
+                            </select>
+                        </div>
+                        <label for="cras" class="col-lg-auto col-form-label">CRAS:</label>
+                        <div class="col-lg-auto">
+                            <select name="cras" id="cras" class="form-select" disabled>
+                                <option value="" selected>Selecionar</option>
+                                <option value="ArcoIris">CRAS Arco-Íris</option>
+                                <option value="Borboleta">CRAS Borboleta</option>
+                                <option value="Horta">CRAS Horta</option>
+                                <option value="Colheita">CRAS Colheita</option>
+                                <option value="Ourinho">CRAS Ourinho</option>
+                                <option value="Pratinha">CRAS Pratinha</option>
+                            </select>
+                        </div>
+                    </div>
+                </h5>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-light" style="vertical-align: middle;">
+                            <tr>
+                                <th scope="col">UF</th>
+                                <th scope="col">Município</th>
+                                <th scope="col">CRAS</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Pedidos Realizado</th>
+                                <th scope="col">Pedidos Enviado</th>
+                                <th scope="col">Pedidos Recebidos</th>
+                                <th scope="col">Kits Usados</th>
+                                <th scope="col">Envio Autorizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Borboleta</td>
+                                <td>10/10/2020</td>
+                                <td><b class="positivo">100</b></td>
+                                <td><b class="positivo">20</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="positivo">10</b></td>
+                                <td><b class="positivo">Sim</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Arco-Íris</td>
+                                <td>05/06/2020</td>
+                                <td><b class="positivo">100</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="nulo">Não</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Horta</td>
+                                <td>10/10/2021</td>
+                                <td><b class="positivo">100</b></td>
+                                <td><b class="positivo">20</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="positivo">10</b></td>
+                                <td><b class="nulo">Não</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Ourinho</td>
+                                <td>07/07/2021</td>
+                                <td><b class="positivo">100</b></td>
+                                <td><b class="positivo">10</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="positivo">10</b></td>
+                                <td><b class="positivo">Sim</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Colheita</td>
+                                <td>11/10/2020</td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="nulo">Não</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Borboleta</td>
+                                <td>20/05/2021</td>
+                                <td><b class="positivo">50</b></td>
+                                <td><b class="positivo">15</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="positivo">Sim</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Horta</td>
+                                <td>31/01/2020</td>
+                                <td><b class="positivo">10</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="positivo">2</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="nulo">Não</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Ourinho</td>
+                                <td>10/10/2020</td>
+                                <td><b class="positivo">10</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="nulo">Não</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Pratinha</td>
+                                <td>10/10/2020</td>
+                                <td><b class="positivo">20</b></td>
+                                <td><b class="positivo">15</b></td>
+                                <td><b class="positivo">2</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="positivo">Sim</b></td>
+                            </tr>
+                            <tr>
+                                <td>SP</td>
+                                <td>São Paulo</td>
+                                <td>CRAS Arco-Íris</td>
+                                <td>10/10/2020</td>
+                                <td><b class="positivo">100</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="nulo">0</b></td>
+                                <td><b class="positivo">5</b></td>
+                                <td><b class="positivo">Sim</b></td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="bg-light">
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Buscar">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Buscar">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" placeholder="Buscar">
+                                </td>
+                                <td colspan="6"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="d-flex flex-row justify-content-evenly align-items-baseline my-0">
+                        <div class="col-auto">
+                            <h5 class="text-muted" style="font-weight: 400; font-size: 16px;">10 de 21
+                                resultados</h5>
+                        </div>
+                        <div class="col-auto">
+                            <label for="resultadosPorPage" class="form-label text-muted">Mostrar</label>
+                            <select name="resultadosPorPage" id="resultadosPorPage" class="form-select-sm">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                            <label for="resultadosPorPage" class="form-label text-muted">por página</label>
+                        </div>
+                        <nav class="col-auto" aria-label="paginas">
+                            <ul class="pagination my-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Próxima</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

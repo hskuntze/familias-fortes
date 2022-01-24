@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>Solicitação de Kits</title>
+    <style>
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table label {
+            font-weight: 600;
+        }
+
+        #dadosCras {
+            display: none;
+        }
+
+        #dadosCras label {
+            font-weight: 500;
+        }
+
+        hr {
+            margin: 10px auto;
+            max-width: 75%;
+            background-image: radial-gradient(grey, #ccc, white);
+        }
+    </style>
+    <script type="text/javascript">
+        function showDivOnSelect(divId, element) {
+            document.getElementById(divId).style.display = element.value != "" ? 'block' : 'none';
+        }
+
+        function lockSelect(element, other) {
+            if (element.value == "") {
+                document.getElementById(other).disabled = true;
+            } else {
+                document.getElementById(other).disabled = false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div class="container w-50 my-4 border border-1 mx-auto shadow">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label for="estado">Estado:</label></td>
+                        <td>
+                            <select id="estado" name="estado" class="form-select"
+                                onchange="lockSelect(this, 'municipio');">
+                                <option value="" selected>Selecionar</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="municipio">Município:</label></td>
+                        <td>
+                            <select id="municipio" name="municipio" class="form-select"
+                                onchange="lockSelect(this, 'cras');" disabled>
+                                <option value="" selected>Selecionar</option>
+                                <option value="EstivaGerbi">Estiva Gerbi</option>
+                                <option value="Chavantes">Chavantes</option>
+                                <option value="Zacarias">Zacarias</option>
+                                <option value="Votuporanga">Votuporanga</option>
+                                <option value="Votorantim">Votorantim</option>
+                                <option value="Urânia">Urânia</option>
+                                <option value="UniãoPaulista">União Paulista</option>
+                                <option value="Urupês">Urupês</option>
+                                <option value="TrêsFronteiras">Três Fronteiras</option>
+                                <option value="Tremembé">Tremembé</option>
+                                <option value="Trabiju">Trabiju</option>
+                                <option value="Torrinha">Torrinha</option>
+                                <option value="SãoSimão">São Simão</option>
+                                <option value="SãoSebastião">São Sebastião</option>
+                                <option value="Santos">Santos</option>
+                                <option value="SantoExpedito">Santo Expedito</option>
+                                <option value="Pindamonhangaba">Pindamonhangaba</option>
+                                <option value="Pinhalzinho">Pinhalzinho</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="cras">CRAS:</label>
+                        </td>
+                        <td>
+                            <select name="cras" id="cras" class="form-select"
+                                onchange="showDivOnSelect('dadosCras', this)" disabled>
+                                <option value="" selected>Selecionar</option>
+                                <option value="ArcoIris">CRAS Arco-Íris</option>
+                                <option value="Borboleta">CRAS Borboleta</option>
+                                <option value="Horta">CRAS Horta</option>
+                                <option value="Colheita">CRAS Colheita</option>
+                                <option value="Ourinho"> Ourinho</option>
+                                <option value="Pratinha">CRAS Pratinha</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container w-50 p-3 my-4 mx-auto shadow border border-1" id="dadosCras">
+            <h5 class="text-center display-6">PEDIDOS DE KITS</h5>
+            <div class="my-3 mx-auto p-1">
+                <div class="mb-4">
+                    <h5 style="font-size: 16px;" class="text-center">Dados do CRAS</h5>
+                    <hr>
+                    <div class="d-flex flex-row mb-2 mt-2 mx-auto justify-content-center text-start p-1"
+                        style="align-items: baseline;">
+                        <div class="col-2">
+                            <label for="municipioCras" class="flex-col-sm-2 form-label">Município:&nbsp;</label>
+                        </div>
+                        <div class="col-2">
+                            <input type="text" readonly class="form-control-plaintext" value="São Paulo"
+                                id="municipioCras">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row mb-2 mx-auto justify-content-center text-start p-1"
+                        style="align-items: baseline;">
+                        <div class="col-2">
+                            <label for="nomeCras" class="flex-col-sm-2 form-label">Nome do CRAS:&nbsp;</label>
+                        </div>
+                        <div class="col-2">
+                            <input type="text" readonly class="form-control-plaintext" value="CRAS Arco-Íris"
+                                id="nomeCras">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row mb-2 mx-auto justify-content-center text-start p-1"
+                        style="align-items: baseline;">
+                        <div class="col-2">
+                            <label for="coordenador" class="flex-col-sm-2 form-label">Coordenador:&nbsp;</label>
+                        </div>
+                        <div class="col-2">
+                            <input type="text" readonly class="form-control-plaintext" value="Arnaldo Machado da Silva"
+                                id="coordenador">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row mb-2 mx-auto justify-content-center text-start p-1"
+                        style="align-items: baseline;">
+                        <div class="col-2">
+                            <label for="cpfCoordenador" class="flex-col-sm-2 form-label">CPF:&nbsp;</label>
+                        </div>
+                        <div class="col-2">
+                            <input type="text" readonly class="form-control-plaintext" value="124.661.441-22"
+                                id="cpfCoordenador">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h5 style="font-size: 16px;" class="text-center">Dados para Envio</h5>
+                    <hr>
+                    <div class="d-flex flex-row mb-2 mt-2 mx-auto justify-content-center text-start p-1"
+                        style="align-items: baseline;">
+                        <div class="col-2">
+                            <label for="enderecoEnvio" class="flex-col-sm-2 form-label">Endereço:&nbsp;</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" readonly class="form-control-plaintext"
+                                value="Rua Barão de Santo Angelo, 147 Brasilândia São Paulo/SP" id="enderecoEnvio">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row mb-2 mx-auto justify-content-center text-start p-1"
+                        style="align-items: baseline;">
+                        <div class="col-2">
+                            <label for="cepEnvio" class="flex-col-sm-2 form-label">CEP:&nbsp;</label>
+                        </div>
+                        <div class="col-2">
+                            <input type="text" readonly class="form-control-plaintext" value="02842000" id="cepEnvio">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row mb-2 mt-2 mx-auto justify-content-center p-1 text-center">
+                        <h5 style="font-size: 13px;">Confira os dados do seu CRAS. Ao realizar o pedido, você confirma
+                            que os dados estão corretos e a entrega pode ser feita no endereço fornecido. Caso o
+                            endereço do CRAS acima não seja o endereço correto atual, <b style="color: red">atualize os
+                                dados no CadSUAS</b> antes de fazer o pedido.</h5>
+                    </div>
+                </div>
+                <div class="mb-1">
+                    <h5 style="font-size: 16px;" class="text-center">Pedido</h5>
+                    <hr>
+                    <div class="d-flex flex-row mb-2 mt-2 mx-auto justify-content-center p-1 text-center">
+                        <h5 style="font-size: 13px;">Solicite abaixo o nº de kits que você deseja
+                            solicitar. Esse número
+                            deve ser definido de acordo com o planejamento de grupos e garanta que poderá realizar as
+                            oficinas nos próximos meses.</h5>
+                    </div>
+                    <div class="d-flex flex-row mb-2 mt-2 mx-auto justify-content-center text-start p-1"
+                        style="align-items: baseline;">
+                        <div class="col-2">
+                            <label for="numeroKits" class="flex-col-sm-2 form-label">Número de Kits:&nbsp;</label>
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="numeroKits">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mx-auto mb-3">
+                <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#confirmar">Enviar</button>
+            </div>
+        </div>
+        <div class="modal" id="confirmar">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                
+                    </div>
+                    <div class="modal-body">
+                        <p>Pedido de kits realizado com sucesso!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
